@@ -3,10 +3,17 @@ version: '3.8'
 networks:
  default:
    name: expense
+volumes:
+  mysql:
+     external: true
 services:
   mysql:
     image: mysql:v1.0
-    container_name: mysql
+    container_name: mysql  # --name mysql
+    volumes:
+    - source: mysql
+      target: /var/lib/mysql
+      type: volume # -v volume-name:/path/in/container
   backend:
      image: backend:v1.0
      container_name: backend
